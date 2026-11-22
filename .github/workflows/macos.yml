@@ -27,7 +27,8 @@ jobs:
           HEALTH_REMINDER_BUILD_TESTS: "1"
         run: |
           bash macos/build.sh
-          xcrun lipo -verify_arch arm64 x86_64 "dist/macos/Health Reminder.app/Contents/MacOS/HealthReminder"
+          architectures="$(xcrun lipo -archs 'dist/macos/Health Reminder.app/Contents/MacOS/HealthReminder')"
+          [[ " $architectures " == *" arm64 "* && " $architectures " == *" x86_64 "* ]]
       - name: Store the universal macOS package
         if: matrix.runner == 'macos-15'
         uses: actions/upload-artifact@v4

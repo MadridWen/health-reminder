@@ -1,6 +1,8 @@
 # 健康提醒 · Health Reminder
 
-适用于 Windows 10 和 Windows 11。可从 GitHub Releases 下载 `HealthReminder.exe`，也可在本地构建后打开 `dist\HealthReminder.exe`。
+## Windows 10 和 11
+
+可从 GitHub Releases 下载 `HealthReminder.exe`，也可在本地构建后打开 `dist\HealthReminder.exe`。
 
 双击即可运行。启动后，右下角系统托盘会出现蓝色水滴。如果图标折叠在托盘里，点任务栏的上箭头即可找到。右键水滴可以确认喝水、查看下次喝水倒计时、打开设置或退出。
 
@@ -26,7 +28,7 @@
 
 右键托盘水滴，打开「设置」，勾选或取消「开机登录后自动启动」并保存。默认关闭，只为当前 Windows 用户设置。移动应用后，打开新位置的应用并再保存一次设置，即可更新启动路径。
 
-## 从源码构建
+## 构建 Windows 版
 
 在 Windows 10 或 11 上，从项目目录运行以下命令。构建脚本使用系统的 .NET Framework C# 编译器，输出为 `dist\HealthReminder.exe`。
 
@@ -35,6 +37,20 @@
 ```
 
 应用使用 Win32 托盘、窗口和通知。后台由一个 5 秒计时器检查提醒状态，开启宠物后才会解码并启用宠物动画。设置、宠物图片和位置保存在 `%LOCALAPPDATA%\HealthReminder`。WebP 解码器随可执行文件提供，其许可证在 `dist\ThirdPartyNotices.txt`。
+
+## macOS 13 及以上
+
+下载并解压 `HealthReminder-macOS.zip`，打开其中的 `Health Reminder.app`。同一个应用包支持 Apple Silicon 和 Intel Mac。
+
+在菜单栏的水滴菜单里可以确认喝水、查看倒计时和打开设置。桌面宠物也支持拖动、右键确认喝水和从设置导入 WebP。开机登录启动可在应用设置中切换，通知横幅由 macOS 的通知权限控制。
+
+应用包使用临时签名，未进行 Apple 公证。也可以在装有 Xcode 命令行工具的 Mac 上运行以下命令自行构建。
+
+```bash
+bash macos/build.sh
+```
+
+输出位于 `dist/macos`。设置 `HEALTH_REMINDER_BUILD_TESTS=1` 可以在打包前运行计时、WebP 解码和界面启动检查。
 
 ## 许可证
 
