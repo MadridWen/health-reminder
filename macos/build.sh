@@ -20,7 +20,7 @@ sdk="$(xcrun --sdk macosx --show-sdk-path)"
 sources=("$root/macos/Schedule.swift" "$root/macos/Pet.swift" "$root/macos/SettingsView.swift" "$root/macos/main.swift")
 
 for arch in arm64 x86_64; do
-    xcrun swiftc -swift-version 5 -O -module-name HealthReminder \
+    xcrun swiftc -parse-as-library -swift-version 5 -O -module-name HealthReminder \
         -target "$arch-apple-macos13.0" -sdk "$sdk" \
         -o "$stage/HealthReminder-$arch" "${sources[@]}"
 done

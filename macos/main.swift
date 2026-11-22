@@ -333,19 +333,25 @@ private func smokeTest() throws {
     print("macOS GUI smoke test passed: menu bar item, settings, and transparent pet window.")
 }
 
-do {
-    if CommandLine.arguments.contains("--self-test") {
-        try runChecks()
-    } else if CommandLine.arguments.contains("--smoke-test") {
-        try smokeTest()
-    } else {
-        let app = NSApplication.shared
-        let delegate = ReminderApp()
-        app.setActivationPolicy(.accessory)
-        app.delegate = delegate
-        app.run()
+@main
+struct HealthReminder {
+    @MainActor
+    static func main() {
+        do {
+            if CommandLine.arguments.contains("--self-test") {
+                try runChecks()
+            } else if CommandLine.arguments.contains("--smoke-test") {
+                try smokeTest()
+            } else {
+                let app = NSApplication.shared
+                let delegate = ReminderApp()
+                app.setActivationPolicy(.accessory)
+                app.delegate = delegate
+                app.run()
+            }
+        } catch {
+            fputs(error.localizedDescription + "\n", stderr)
+            exit(1)
+        }
     }
-} catch {
-    fputs(error.localizedDescription + "\n", stderr)
-    exit(1)
 }
