@@ -1,0 +1,10 @@
+/dist/
+/.build/
+/.verification/
+/.qa-*/
+/.webp-download/
+*.user
+*.pdb
+*.log
+.DS_Store
+Thumbs.db
