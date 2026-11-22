@@ -314,9 +314,13 @@ private func runChecks() throws {
 @MainActor
 private func smokeTest() throws {
     let app = NSApplication.shared
-    precondition(app.setActivationPolicy(.accessory))
+    app.setActivationPolicy(.accessory)
+    app.finishLaunching()
     let bar = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-    precondition(bar.button != nil)
+    guard bar.button != nil else {
+        throw NSError(domain: "HealthReminderSmokeTest", code: 1,
+                      userInfo: [NSLocalizedDescriptionKey: "The macOS session did not provide a status item button."])
+    }
     let pet = DesktopPet(art: try PetArt.builtIn(), menu: { NSMenu() }, positionChanged: { _ in })
     pet.show(position: nil)
     let settings = SettingsView(movement: "45", water: "60", rest: "5", launchAtLogin: false,
@@ -326,7 +330,10 @@ private func smokeTest() throws {
     window.isReleasedWhenClosed = false
     window.orderFrontRegardless()
     RunLoop.main.run(until: Date().addingTimeInterval(0.25))
-    precondition(window.isVisible)
+    guard window.isVisible else {
+        throw NSError(domain: "HealthReminderSmokeTest", code: 2,
+                      userInfo: [NSLocalizedDescriptionKey: "The macOS session did not show the settings window."])
+    }
     window.close()
     pet.close()
     NSStatusBar.system.removeStatusItem(bar)
