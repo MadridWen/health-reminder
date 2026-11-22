@@ -9,13 +9,13 @@ namespace MoveAndHydrate
         private const int CopyImageButton = 105, CopyAtlasButton = 106, StatusText = 107;
         private const int SaveButton = 1, CancelButton = 2;
         private const string ImagePrompt =
-            "为 Windows 桌面应用生成一只原创桌面宠物。\r\n" +
+            "为桌面应用生成一只原创桌面宠物。\r\n" +
             "角色描述：[把这里替换为你想要的角色，例如背着蓝色水瓶的橘色小狐狸]。\r\n" +
             "生成一张 512×512 像素的正面全身图。角色居中，四周留约 10% 的透明空间，轮廓清楚，缩小到约 100 像素时仍然容易辨认。\r\n" +
             "使用真正的 Alpha 透明背景。画面里只放角色与贴身配件，去掉地面、独立阴影、场景、文字、水印和模拟透明的棋盘格。\r\n" +
             "交付透明 WebP 文件。如果工具只支持透明 PNG，请保持 Alpha 通道，再无损转换为 WebP。";
         private const string AtlasPrompt =
-            "制作一张用于 Windows 桌面宠物的原创像素动画图集。\r\n" +
+            "为桌面宠物制作一张原创像素动画图集。\r\n" +
             "角色描述：[把这里替换为你想要的角色，例如背着蓝色水瓶的橘色小狐狸]。\r\n" +
             "画布精确为 1536×1872 像素，8 列×9 行，每格 192×208 像素。格子连续排列，禁止画出分格线、标签、边框、留缝或水印。\r\n" +
             "从上往下数：第 1 行前 6 格为待机呼吸和眨眼，第 5 行前 5 格为开心跳跃（蓄力、腾空、最高点、下落、站稳），第 7 行前 6 格为等待喝水的动作。每行从左向右播放，其余格子完全透明。\r\n" +
