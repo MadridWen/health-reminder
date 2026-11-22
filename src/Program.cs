@@ -8,7 +8,7 @@ using System.Threading;
 [assembly: AssemblyTitle("健康提醒")]
 [assembly: AssemblyProduct("健康提醒")]
 [assembly: AssemblyDescription("久坐、喝水提醒与桌面宠物")]
-[assembly: AssemblyVersion("1.2.0.0")]
+[assembly: AssemblyVersion("1.2.1.0")]
 
 namespace MoveAndHydrate
 {
