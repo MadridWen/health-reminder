@@ -1,5 +1,7 @@
 # 健康提醒 · Health Reminder
 
+这是一款健康提醒小程序，可以提醒用户久坐或喝水。用户还可以自制宠物，提升趣味性
+
 ## Windows 10 和 11
 
 可从 GitHub Releases 下载 `HealthReminder.exe`，也可在本地构建后打开 `dist\HealthReminder.exe`。
