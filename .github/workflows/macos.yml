@@ -1,0 +1,38 @@
+name: Build and test macOS
+
+on:
+  push:
+    paths:
+      - "macos/**"
+      - "src/default-pet.webp"
+      - "LICENSE"
+      - ".github/workflows/macos.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  macos:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [macos-15, macos-15-intel]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile, sign, and exercise the app
+        env:
+          HEALTH_REMINDER_BUILD_TESTS: "1"
+        run: |
+          bash macos/build.sh
+          xcrun lipo -verify_arch arm64 x86_64 "dist/macos/Health Reminder.app/Contents/MacOS/HealthReminder"
+      - name: Store the universal macOS package
+        if: matrix.runner == 'macos-15'
+        uses: actions/upload-artifact@v4
+        with:
+          name: HealthReminder-macOS
+          path: dist/macos/HealthReminder-macOS.zip
+          if-no-files-found: error
+          retention-days: 7
